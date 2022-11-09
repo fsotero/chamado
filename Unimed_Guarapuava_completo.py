@@ -300,7 +300,7 @@ def coleta_envia_payload_graphql(ti):
             
     
 
-with DAG('Unimed_Guarapuava', start_date = datetime(2022,8,15), schedule_interval = '0 4 * * *', catchup = False, dagrun_timeout=timedelta(minutes=15)) as dag:
+with DAG('Unimed_Guarapuava_completo', start_date = datetime(2022,8,15), schedule_interval = '0 4 * * *', catchup = False, dagrun_timeout=timedelta(minutes=15)) as dag:
 
     coleta_token_fastmedic = PythonOperator(
         task_id = "Coleta_Token_Fastmedic",
