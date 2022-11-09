@@ -156,7 +156,7 @@ def coleta_data_paginas_graphql(ti):
         return ["exceção"]
 
     else:
-        total_paginas = r.json()["data"]["getHistoryByDate"]["totalPages"]
+        total_paginas = r.json()["data"]["getHistoryByDateIntegration"]["totalPages"]
         return total_paginas
 
 def valida_coleta_data_paginas_graphql(ti):
@@ -284,7 +284,7 @@ def coleta_envia_payload_graphql(ti):
     
         print("--------------- Chamando endpoint do GraphQL ---------------")
         r = requests.post(endpoint_graphql_prod, data=json.dumps(data), headers={"Content-type" : "application/json", "Authorization" : graphQL_token})
-        payloads = r.json()["data"]["getHistoryByDate"]["history"]
+        payloads = r.json()["data"]["getHistoryByDateIntegration"]["history"]
         print(f"--------------- {paginas}ª pagina ---------------")
         
         payloads = [payload for payload in payloads if payload["evolutionSoap"] != None or (payload["evolutionNote"] != None and payload["evolutionNote"]["observacao"] != "Novo responsável pelo atendimento")]
