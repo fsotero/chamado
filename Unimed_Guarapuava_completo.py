@@ -204,42 +204,42 @@ def transforma_payload(payload):
         if payload["evolutionSoap"]["sgOrgaoProfissional"] != None:
             sg_conselho_profissional = payload["evolutionSoap"]["sgOrgaoProfissional"]
         else:
-            sg_conselho_profissional = None
+            sg_conselho_profissional = "CRM"
     else:
         if payload["evolutionNote"]["sgOrgaoProfissional"] != None:
             sg_conselho_profissional = payload["evolutionNote"]["sgOrgaoProfissional"]
         else:
-            sg_conselho_profissional = None 
+            sg_conselho_profissional = "CRM" 
     if payload["evolutionSoap"] != None:
         if payload["evolutionSoap"]["nomeProfissionalSolicitante"] != None:
             nome_profissional = payload["evolutionSoap"]["nomeProfissionalSolicitante"]
         else:
-            nome_profissional = None
+            nome_profissional = "."
     else:
         if payload["evolutionNote"]["nomeProfissionalSolicitante"] != None:
             nome_profissional = payload["evolutionNote"]["nomeProfissionalSolicitante"]
         else:
-            nome_profissional = None 
+            nome_profissional = "." 
     if payload["evolutionSoap"] != None:
         if payload["evolutionSoap"]["numConsRegistroProfissional"] != None:
             nr_conselho_profissional = payload["evolutionSoap"]["numConsRegistroProfissional"]
         else:
-            nr_conselho_profissional = None
+            nr_conselho_profissional = "."
     else:
         if payload["evolutionNote"]["numConsRegistroProfissional"] != None:
             nr_conselho_profissional = payload["evolutionNote"]["numConsRegistroProfissional"]
         else:
-            nr_conselho_profissional = None
+            nr_conselho_profissional = "."
     if payload["evolutionSoap"] != None:
         if payload["evolutionSoap"]["ufConsProfissional"] != None:
             uf_conselho_profissional = payload["evolutionSoap"]["ufConsProfissional"]
         else:
-            uf_conselho_profissional = None
+            uf_conselho_profissional = "PR"
     else:
         if payload["evolutionNote"]["ufConsProfissional"] != None:
             uf_conselho_profissional = payload["evolutionNote"]["ufConsProfissional"]
         else:
-            uf_conselho_profissional = None
+            uf_conselho_profissional = "PR"
     
     payload = {
                     "usuario" : {
@@ -293,8 +293,8 @@ def coleta_envia_payload_graphql(ti):
         for payload in payloads:
             data = transforma_payload(payload)
             print(data)
-            print('json: ',json.dumps(data))
-            r = requests.post("https://saude.fastmedic.com.br/api.integracao/api/IntegracaoConsulta/SalvarConsultaIntegracao", data=json.dumps(data), headers={"Content-type" : "application/json", "Authorization" : fastmedic_token})
+            print('json: ',json.dumps(data, ensure_ascii=False))
+            r = requests.post("https://saude.fastmedic.com.br/api.integracao/api/IntegracaoConsulta/SalvarConsultaIntegracao", data=json.dumps(data, ensure_ascii=False), headers={"Content-type" : "application/json", "Authorization" : fastmedic_token})
             print(r.status_code)
             print(r.json())
         paginas = paginas + 1
