@@ -293,7 +293,7 @@ def coleta_envia_payload_graphql(ti):
         for payload in payloads:
             data = transforma_payload(payload)
             print(data)
-            print('json: ',json.dumps(data, ensure_ascii=False)) #, ensure_ascii=False
+            #print('json: ',json.dumps(data))  Caso queiramos verificar o payload passado na integração, descomentar (, ensure_ascii=False para formatação se necessário)
             r = requests.post("https://saude.fastmedic.com.br/api.integracao/api/IntegracaoConsulta/SalvarConsultaIntegracao", data=json.dumps(data), headers={"Content-type" : "application/json", "Authorization" : fastmedic_token})
             print(r.status_code)
             print(r.json())
